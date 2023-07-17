@@ -14,19 +14,11 @@ app.use(express.json());
 // parse requests of content-type - application/x-www-form-urlencoded
 app.use(express.urlencoded({ extended: true }));
 
-if (process.env.NODE_ENV === "production"){
-  app.use(express.static(path.resolve(__dirname, '../frontend/build')));
-  app.get('*', (req, res)=>{
-    res.sendFile(path.resolve(__dirname, '../frontend/build', 'index.html'));
-  });
-} else {
-  app.get("/", (req, res)=>{
-    // console.log("jnds")
-    res.send("API is running...");
-    // res.sendFile(path.resolve(__dirname, "frontend", "build", "index.html"))
-    // res.sendFile(path.resolve(__dirname, '../frontend/build', 'index.html'));
-  })
-}
+const root = require('path').join(__dirname, 'frontend', 'build')
+app.use(express.static(root));
+app.get("*", (req, res) => {
+  res.sendFile('index.html', { root });
+})
 
 app.listen(PORT, () => {
   console.log(`Now listening on port ${PORT}`);
