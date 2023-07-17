@@ -1,0 +1,15 @@
+.App {
+  font-family: sans-serif;
+  text-align: center;
+}
+.grid-lines line {
+  stroke: gray;
+  stroke-opacity: 0.2;
+}
+
+svg text{
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
