@@ -26,6 +26,9 @@ router.post(
     // check('description').isLength({ min: 5 }),
     check('optimizedPopulation')
       .not()
+      .isEmpty(),
+    check('points')
+      .not()
       .isEmpty()
   ],
   solutionsControllers.createSolution

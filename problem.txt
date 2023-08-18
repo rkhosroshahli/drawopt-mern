@@ -1,0 +1,4 @@
+1- The data is not posted. maybe the post from front side is not sending or the back end is not connected.
+2- Make sure the frontend sends the data via post in NewPoint.js
+3- Check the NewPoint handler function is called.
+Solved: The frontend does not call pointSubmitHandler function after button press.

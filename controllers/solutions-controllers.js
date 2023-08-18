@@ -69,47 +69,55 @@ const createSolution = async (req, res, next) => {
     );
   }
 
-  const { optimizer, optimizedSolution, optimizedPopulation, pointsId } = req.body;
+  const { optimizer, optimizedSolution, optimizedPopulation, pointsData } = req.body;
 
   const createdSolution = new solution({
     optimizer,
     optimizedSolution,
     optimizedPopulation,
-    pointsId
+    pointsData
   });
 
-  let points;
   try {
-    points = await Point.findById(pointsId);
+    await createdSolution.save();
   } catch (err) {
     const error = new HttpError(
-      'Creating place failed, please try again.',
+      'Saving solutions in DB failed, please try again later.',
       500
     );
     return next(error);
   }
 
-  if (!points) {
-    const error = new HttpError('Could not find points for provided id.', 404);
-    return next(error);
-  }
+  // let points;
+  // try {
+  //   points = await Point.findById(pointsId);
+  // } catch (err) {
+  //   const error = new HttpError(
+  //     'Creating place failed, please try again.',
+  //     500
+  //   );
+  //   return next(error);
+  // }
+  // if (!points) {
+  //   const error = new HttpError('Could not find points for provided id.', 404);
+  //   return next(error);
+  // }
+  // try {
+  //   const sess = await mongoose.startSession();
+  //   sess.startTransaction();
+  //   await createdPoint.save({ session: sess });
+  //   points.solutions.push(createdSolution);
+  //   await points.save({ session: sess });
+  //   await sess.commitTransaction();
+  // } catch (err) {
+  //   const error = new HttpError(
+  //     'Creating solution failed, please try again.',
+  //     500
+  //   );
+  //   return next(error);
+  // }
 
-  try {
-    const sess = await mongoose.startSession();
-    sess.startTransaction();
-    await createdPoint.save({ session: sess });
-    points.solutions.push(createdSolution);
-    await points.save({ session: sess });
-    await sess.commitTransaction();
-  } catch (err) {
-    const error = new HttpError(
-      'Creating solution failed, please try again.',
-      500
-    );
-    return next(error);
-  }
-
-  res.status(201).json({ point: createdPoint });
+  res.status(201).json({ solution: createdSolution });
 };
 
 exports.getSolutionsById = getSolutionsById;

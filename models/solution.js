@@ -12,7 +12,7 @@ const solutionSchema = new Schema({
     algorithm: { type: String, required: true },
     np: { type: Number, required: true },
     maxIter: { type: Number, required: true },
-    params: { ype: String, required: true }
+    params: { type: String, required: false }
     },
   optimizedSolution: {
     x: { type: Number, required: true },
@@ -22,7 +22,11 @@ const solutionSchema = new Schema({
     x: { type: Number, required: true },
     f: { type: Number, required: true }
   }],
-  pointsId: { type: mongoose.Types.ObjectId, required: true, ref: 'Point' }
+  points: [{
+    x: { type: Number, required: true },
+    y: { type: Number, required: true }
+  }],
+  // pointsId: { type: mongoose.Types.ObjectId, required: true, ref: 'Point' }
   // dateCreated: {type: Date, default: Date.now}
   // creator: { type: mongoose.Types.ObjectId, required: true, ref: 'User' }
   }, {

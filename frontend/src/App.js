@@ -6,6 +6,7 @@ import {DE, init_population} from "./DE";
 import * as d3 from "d3";
 import _ from 'lodash'
 import logo from './uploads/images/NICI.png';
+import solutionsSubmitHandler from './solutions/NewSolutions';
 
 function App() {
   const thickness = 2;
@@ -53,6 +54,7 @@ function App() {
 
   function handleParamsSubmit(event) {
     event.preventDefault();
+    pointSubmitHandler(lines[0].coords);
     const form = event.currentTarget;
     const np = parseInt(form.elements.populationSize.value);
     const maxiter = parseInt(form.elements.maxIterations.value);
@@ -90,6 +92,7 @@ function App() {
     });
     startEngine(population, bounds, popsize, maxiter, mutate, recombination)
     //plotOptimals();
+    solutionsSubmitHandler({algorithm: 'DE', np: popsize, maxiter: maxiter, }, optimalSolution, optimalPop, lines[0].coords);
   });
 
   let timout = null;
@@ -122,6 +125,7 @@ function App() {
       timout = setTimeout(() => runIter(pop_x, numIter, bounds, popsize, maxiter, mutate, recombination), 2000)
     }
     // population = pop_x;
+    
   }
 
   const startEngine = (firstPop, bounds, popsize, maxiter, mutate, recombination) => {

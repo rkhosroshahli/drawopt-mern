@@ -1,12 +1,13 @@
 const { isLoading, error, sendRequest, clearError } = useHttpClient();
-const pointSubmitHandler = async (optimizer, optimizedSolution, optimizedPopulation) => {
+const solutionSubmitHandler = async (optimizer, optimizedSolution, optimizedPopulation, pointData) => {
     event.preventDefault();
     try {
         const formData = new FormData();
         formData.append('optimizer', optimizer);
         formData.append('optimizedSolution', optimizedSolution);
         formData.append('optimizedPopulation', optimizedPopulation);
-        await sendRequest(process.env.REACT_APP_BACKEND_URL+'/points', 'POST', formData);
+        formData.append('points', pointData);
+        await sendRequest(process.env.REACT_APP_BACKEND_URL+'/solutions', 'POST', formData);
     } catch (err) {}
 };
-export default pointSubmitHandler;
+export default solutionsSubmitHandler;

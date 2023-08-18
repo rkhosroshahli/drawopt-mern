@@ -4,6 +4,9 @@ const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 // const cors = require("cors");
 
+const pointsRoutes = require('./routes/points-routes');
+const solutionsRoutes = require('./routes/solutions-routes');
+
 const app = express();
 
 // const port = 5000;
@@ -21,9 +24,8 @@ app.get("*", (req, res) => {
   res.sendFile('index.html', { root });
 })
 
-// app.listen(PORT, () => {
-//   console.log(`Now listening on port ${PORT}`);
-// });
+app.use('/api/points', pointsRoutes);
+app.use('/api/solutions', solutionsRoutes);
 
 app.use((req, res, next) => {
   res.setHeader('Access-Control-Allow-Origin', '*');
