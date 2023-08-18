@@ -21,9 +21,9 @@ app.get("*", (req, res) => {
   res.sendFile('index.html', { root });
 })
 
-app.listen(PORT, () => {
-  console.log(`Now listening on port ${PORT}`);
-});
+// app.listen(PORT, () => {
+//   console.log(`Now listening on port ${PORT}`);
+// });
 
 app.use((req, res, next) => {
   res.setHeader('Access-Control-Allow-Origin', '*');
