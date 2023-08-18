@@ -15,7 +15,7 @@ app.use(express.json());
 // parse requests of content-type - application/x-www-form-urlencoded
 app.use(express.urlencoded({ extended: true }));
 
-const root = require('path').join(__dirname, 'frontend', 'build')
+const root = path.join(__dirname, 'frontend', 'build')
 app.use(express.static(root));
 app.get("*", (req, res) => {
   res.sendFile('index.html', { root });
@@ -40,13 +40,7 @@ app.use((req, res, next) => {
 
 mongoose
   .connect(
-    `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASSWORD}@clusternetworkassignmen.efumv5c.mongodb.net/optimizationDB?retryWrites=true&w=majority`,
-    {
-        useNewUrlParser: true,
-        useFindAndModify: false,
-        useUnifiedTopology: true,
-        useCreateIndex: true 
-    }
+    `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASSWORD}@clusternetworkassignmen.efumv5c.mongodb.net/optimizationDB?retryWrites=true&w=majority`
   )
   .then(() => {
     app.listen(PORT, () => {
