@@ -5,6 +5,7 @@ import {useCallback, useEffect, useRef, useState} from "react";
 import {DE, init_population} from "./DE";
 import * as d3 from "d3";
 import _ from 'lodash'
+import logo from './uploads/images/NICI.png';
 
 function App() {
   const thickness = 2;
@@ -170,10 +171,12 @@ function App() {
         <nav
             className="navbar bg-body-tertiary my-2"
         >
-          <div className="container-fluid">
-            <span className="navbar-brand mb-0 h1">
-              Draw and Optimize
-            </span>
+          <div className="container-fluid justify-content-center">
+          <a class="navbar-brand" href="#">
+          <img src={logo} alt="Logo" width="100%" height="100" class="d-inline-block align-text-top"/>
+          <br/> Draw and Optimize
+          </a>
+          
           </div>
         </nav>
         {/*<Container>*/}
